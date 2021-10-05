@@ -2,6 +2,7 @@ const express = require('express');
 const next = require('next');
 
 const dev = process.env.NODE_ENV !== 'production';
+
 const app = next({ dev: false });
 const handle = app.getRequestHandler();
 
@@ -14,7 +15,7 @@ app.prepare().then(() => {
     return handle(req, res);
   });
 
-  server.listen(dev ? 3000 : process.env.PORT, () => {
-    console.log(`서버 실행중 port ${dev ? '3000' : process.env.PORT}`);
+  server.listen(process.env.PORT, () => {
+    console.log(`서버 실행중 port ${process.env.PORT}`);
   });
 });
