@@ -6,7 +6,7 @@ const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev: false });
 const handle = app.getRequestHandler();
 
-const PORT = 8080;
+const PORT = 443;
 
 app.prepare().then(() => {
   const server = express();
@@ -15,7 +15,7 @@ app.prepare().then(() => {
     return handle(req, res);
   });
 
-  server.listen(process.env.PORT, () => {
-    console.log(`서버 실행중 port ${process.env.PORT}`);
+  server.listen(PORT, () => {
+    console.log(`서버 실행중 port ${PORT}`);
   });
 });
