@@ -1,21 +1,23 @@
 const express = require('express');
-const next = require('next');
+const http = require('http');
 
-const dev = process.env.NODE_ENV !== 'production';
+const next = require('next');
 
 const app = next({ dev: false });
 const handle = app.getRequestHandler();
 
-const PORT = 443;
-
 app.prepare().then(() => {
+  http.createServer(app).listen(app.get('port'), function () {
+    console.log('Express server listening on port ' + app.get('port'));
+  });
+
   const server = express();
 
   server.get('*', (req, res) => {
-    return handle(req, res);
+    res.redirect('https://' + req.header.host + req.path);
   });
 
-  server.listen(PORT, () => {
-    console.log(`서버 실행중 port ${PORT}`);
+  server.listen(443, () => {
+    console.log('서버 실행중');
   });
 });
