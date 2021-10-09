@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "build": "next build",
+    "eject": "next eject",
     "start": "next -p 8080"
   },
   "dependencies": {
